@@ -1,0 +1,41 @@
+<%-include("partials/header")-%>
+<main class="bg-c3 min-h-screen">
+    <div class="flex justify-between items-center container mx-auto">
+        <section class=" basis-2/5 text-center py-8 px-16 border-white border-4 border-solid rounded-lg my-20 mx-auto">
+            <form action="/users/login" method="post" class="flex flex-col">
+                <label for="" class="text-2xl py-2 pb-6 ">Login</label>
+                <%if(success){%>
+                <label class="text-green-600 font-semibold"><%=success%></label>
+                <%}%>
+                <%if(error){%>
+                <label class="text-red-500 font-semibold"><%=error%></label>
+                <%}%>
+                <label for=""></label>
+                <input class="px-4 py-2 my-2 rounded-md" type="email" name="email" id="" placeholder="Email">
+                <input class="px-4 py-2 my-2 rounded-md" type="password" name="password" id="" placeholder="Password">
+                <input class="px-4 py-2 my-2 rounded-md bg-green-500 cursor-pointer " type="submit" value="Sign In">
+            </form>
+            <a href="/user/password-reset" class="underline">Forgot Password</a>
+            <p class="py-4 text-lg font-bold">Or </p>
+            <div class="oauth-btn">
+                <a class="google-btn" href="/auth/google">
+                    <div class="google-icon-wrapper">
+                        <img class="google-icon"
+                            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+                    </div>
+                    <p class="btn-text"><b>Sign in with Google</b></p>
+                </a>
+                <a class="github-btn" href="/auth/github">
+                    <div class="google-icon-wrapper">
+                        <img class="google-icon"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/600px-Octicons-mark-github.svg.png?20180806170715" />
+                    </div>
+                    <p class="btn-text"><b>Sign in with Github</b></p>
+                </a>
+            </div>
+        </section>
+    </div>
+
+</main>
+
+<%-include("partials/footer")-%>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <!-- <script type="text/javascript" src="https://livejs.com/live.js"></script> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Trakr.</title>
+</head>
+
+<body>
+    <header class="bg-c1">
+        <div class="container text-white flex items-center justify-between mx-auto py-5">
+            <h1 class="text-4xl font-bold ">Trakr.</h1>
+            <nav>
+                <ul class="flex justify-between items-center">
+                    <%if(user){%>
+                    <li class="pl-12 text-xl"><a href="/home/dashboard">Home</a></li>
+                    <%}else{%>
+                    <li class="pl-12 text-xl"><a href="/">Home</a></li>
+                    <%}%>
+
+                    <li class="pl-12 text-xl"><a href="">About</a></li>
+                    <%if(user){%>
+                    <li class="pl-12 text-xl"><a href="/home">Add Income/Expenses</a></li>
+                    <li class="pl-12 text-xl">
+                        <p><%=user.name || user.gg_name || user.gh_name%></p>
+                    </li>
+                    <%}else{%>
+                    <li class="pl-12 text-xl"><a href="/users/login">Login</a></li>
+                    <%}%>
+                    <%if(user){%>
+                    <li class="pl-12 text-xl"><a href="/users/logout">Logout</a></li>
+                    <%}%>
+                </ul>
+            </nav>
+        </div>
+
+
+    </header>

@@ -1,0 +1,44 @@
+<%-include("partials/header")-%>
+<main class="bg-c3 min-h-screen">
+    <div class="container mx-auto flex justify-between items-center py-24">
+        <section class="basis-2/5 text-center">
+            <form action="/income/add" method="post"
+                class="flex flex-col border-2 border-green-400 border-solid p-8 rounded-lg">
+                <label class="text-2xl py-4">Add new Source of Income</label>
+                <%if(successI){%>
+                <label class="text-green-600 font-semibold"><%=successI%></label>
+                <%}%>
+                <input class="px-4 py-2 my-2 rounded-md" type="text" name="source" id="" placeholder="Income source">
+                <input class="px-4 py-2 my-2 rounded-md" type="number" name="amount" id="" placeholder="Amount">
+                <input class="px-4 py-2 my-2 rounded-md" type="date" name="date" id="" placeholder="Date">
+                <input class="px-4 py-2 my-2 rounded-md bg-green-500 cursor-pointer " type="submit"
+                    value="Add new Income">
+            </form>
+        </section>
+        <section class="basis-2/5 text-center">
+            <form action="/expense/add" method="post"
+                class="flex flex-col border-2 border-red-400 border-solid p-8 rounded-lg">
+                <label class="text-2xl py-4">Add new Expense</label>
+                <%if(successE){%>
+                <label class="text-green-600 font-semibold"><%=successE%></label>
+                <%}%>
+                <input class="px-4 py-2 my-2 rounded-md" type="text" name="category" id=""
+                    placeholder="Expense Category">
+                <input class="px-4 py-2 my-2 rounded-md" type="number" name="amount" id="" placeholder="Amount">
+                <input class="px-4 py-2 my-2 rounded-md" type="date" name="date" id="" placeholder="Date">
+                <input class="px-4 py-2 my-2 rounded-md bg-red-500 cursor-pointer " type="submit"
+                    value="Add new Expense">
+            </form>
+        </section>
+
+    </div>
+    <div class="mx-auto text-center">
+        <a href="/home/dashboard" class=" bg-c2 py-4 px-6 text-white text-2xl hover:text-c4 rounded-lg">Go
+            to
+            Dashboard</a>
+    </div>
+
+
+</main>
+
+<%-include("partials/footer")-%>

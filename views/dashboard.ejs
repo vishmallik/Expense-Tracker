@@ -1,0 +1,111 @@
+<%-include("partials/header")-%>
+<main class="bg-c3 min-h-screen">
+    <div class="container mx-auto py-10">
+        <h2 class="text-6xl text-center pb-10">Dashboard</h2>
+        <div class="flex justify-between">
+            <section class="basis-1/3 px-14">
+                <h3 class="text-2xl py-4 font-semibold">Current Month (<%=currentMonth%>) Summary</h3>
+                <div class="bg-c4 p-4 rounded-xl">
+                    <h3 class="text-2xl py-4 font-semibold">Income Sources</h3>
+
+                    <ul class="">
+                        <% let totalIncome = 0;%>
+
+                        <%incomes.forEach((income,index)=>{%>
+                        <%totalIncome+=income.amount%>
+
+                        <li class="basis-1/2 flex justify-between ">
+                            <span class="basis-2/5"><%=income.source%></span>
+                            <span class="basis-3/12">₹<%=income.amount%></span>
+                            <span class="basis-3/12"><%=String(income.date).slice(4,15)%></span>
+                        </li>
+                        <%if(index==incomes.length-1){%>
+                        <span class="basis-1/3 my-4 inline-block"><strong>Total:</strong> ₹<%=totalIncome%></span>
+                        <%}%>
+                                <%})%>
+                    </ul>
+                </div>
+                <div class="bg-c4 p-4 rounded-xl my-4">
+                    <h3 class="text-2xl py-4 font-semibold">Expense Categories</h3>
+                    <ul class=" ">
+                        <%let totalExpense = 0;%>
+                        <%expenses.forEach((expense,index)=>{%>
+                        <%totalExpense+=expense.amount%>
+                        <li class=" flex justify-between">
+                            <span class="basis-2/5"><%=expense.category%></span>
+                            <span class="basis-3/12">₹<%=expense.amount%></span>
+                            <span class="basis-3/12"><%=String(expense.date).slice(4,15)%></span>
+                        </li>
+                        <%if(index==expenses.length-1){%>
+                        <span class="basis-1/3 my-4 inline-block"><strong>Total:</strong> ₹<%=totalExpense%></span>
+                        <%}%>
+                        <%})%>
+                    </ul>
+                </div>
+                <div class="bg-c4 p-4 rounded-xl my-4">
+                    <h3 class="text-2xl py-4  font-semibold">Saving this month</h3>
+                    <p>Income - Expenses =</p>
+                    <p class="font-semibold text-lg">₹<%=totalIncome - totalExpense%></p>
+                </div>
+            </section>
+            <section class="basis-1/3 pt-12 px-14">
+                <div class="bg-c4 p-4 rounded-xl my-4">
+                    <h3 class="text-2xl py-4  font-semibold">Filter by Date</h3>
+                    <form action="/home/bydate" method="post" class="flex flex-col">
+                        <label for="from">From</label>
+                        <input class="rounded-md my-1 px-2 py-1" type="date" name="from" id="from">
+                        <label for="to" class="pt-4">To</label>
+                        <input class="rounded-md my-1 px-2 py-1" type="date" name="to" id="to">
+                        <input type="submit" value="Submit" class="bg-c2 rounded-md mt-2 py-1 px-2">
+                    </form>
+                </div>
+                <div class="bg-c4 p-4 rounded-xl my-4">
+
+                    <h3 class="text-2xl py-4  font-semibold">Filter by Source/Category</h3>
+                    <form action="/home/bycategory" method="post" class="flex flex-col">
+                        <input type="text" placeholder="source/category" name="category"
+                            class="rounded-md my-2 px-2 py-2">
+                        <input type="submit" value="Submit" class="bg-c2 rounded-md mt-2 py-1 px-2">
+                    </form>
+                </div>
+
+
+
+            </section>
+            <section class="basis-1/3 pt-10 px-14">
+                <div class="bg-c4 p-4 rounded-xl my-4">
+
+                    <h3 class="text-2xl py-4 font-semibold">Filter by Date and Category</h3>
+                    <form action="/home/bydateandcategory" method="post" class="flex flex-col">
+                        <label for="from">From</label>
+                        <input class="rounded-md my-1 px-2 py-1" type="date" name="from" id="from">
+                        <label for="to" class="pt-4">To</label>
+                        <input class="rounded-md my-1 px-2 py-1" type="date" name="to" id="to">
+                        <label for="to" class="pt-4">Income Source/ Expense Category</label>
+                        <input type="text" placeholder="source/category" name="category"
+                            class="rounded-md my-2 px-2 py-2">
+                        <input type="submit" value="Submit" class="bg-c2 rounded-md mt-2 py-1 px-2">
+                    </form>
+                </div>
+
+
+
+                <div class="bg-c4 p-4 rounded-xl my-4">
+
+                    <h3 class="text-2xl py-4 font-semibold">View by Month and year</h3>
+                    <form action="/home/bymonth" method="post" class="flex flex-col">
+                        <input type="month" placeholder="" name="month" class="rounded-md my-2 px-2 py-2">
+                        <input type="submit" value="Submit" class="bg-c2 rounded-md mt-2 py-1 px-2">
+                    </form>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+
+
+</main>
+
+<%-include("partials/footer")-%>
