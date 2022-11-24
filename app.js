@@ -13,7 +13,7 @@ const auth = require("./middlewares/auth");
 require("dotenv").config();
 require("./modules/passport");
 
-const uri = process.env.MONGOURL;
+const uri = process.env.MONGO_URL;
 
 mongoose.connect(uri, (err) => {
   console.log(err ? err : "Connected to DB");
@@ -24,7 +24,6 @@ const usersRouter = require("./routes/users");
 const homeRouter = require("./routes/home");
 const expenseRouter = require("./routes/expense");
 const incomeRouter = require("./routes/income");
-const { userInfo } = require("os");
 
 const app = express();
 
@@ -42,9 +41,8 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({
-      mongoUrl: process.env.MONGOURL,
-      collectionName: "sessions",
+    store: MongoStore.create({
+      client: mongoose.connection.getClient(),
     }),
   })
 );
