@@ -21,12 +21,10 @@ let monthNames = [
 router.get("/", function (req, res, next) {
   let successE = req.flash("successE");
   let successI = req.flash("successI");
-  console.log(successE, successI);
   res.render("home", { successI, successE });
 });
 
 router.get("/dashboard", (req, res, next) => {
-  console.log(req.user.id);
   let month = Number(new Date().getMonth()) + 1;
   let currentMonth = monthNames[month - 1];
 
@@ -42,7 +40,6 @@ router.get("/dashboard", (req, res, next) => {
     },
   ]).exec((err, incomes) => {
     if (err) return next(err);
-    console.log(incomes);
     Expense.aggregate([
       { $addFields: { month: { $month: "$date" } } },
       {
@@ -125,7 +122,6 @@ router.post("/bydateandcategory", (req, res, next) => {
 router.post("/bycategory", (req, res, next) => {
   let category = req.body.category.toLowerCase();
   Income.find({ source: category, userId: req.user.id }, (err, incomes) => {
-    console.log(incomes, category);
     if (err) return next(err);
     Expense.find(
       { category: category, userId: req.user.id },

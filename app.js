@@ -42,8 +42,9 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-      client: mongoose.connection.getClient(),
+    store: new MongoStore({
+      mongoUrl: process.env.MONGOURL,
+      collectionName: "sessions",
     }),
   })
 );
